@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS Splitwise;
 
 USE Splitwise;
 
-/**---------------------------User--------------------------**/
+/**---------------------------User Details--------------------------**/
 Create table Splitwise.User
 (
 User_Id int AUTO_INCREMENT,
@@ -13,9 +13,9 @@ User_Password varchar(45) NOT NULL,
 
 CONSTRAINT UserID_PK PRIMARY KEY (User_Id)
 );
-/**---------------------------User--------------------------**/
+/**---------------------------User Details--------------------------**/
 
-/**---------------------------Grouping--------------------------**/
+/**---------------------------Group Details--------------------------**/
 Create table Splitwise.Grouping
 (
 Group_Id int AUTO_INCREMENT,
@@ -23,64 +23,66 @@ Group_Name varchar(45),
 
 CONSTRAINT PK_GroupID PRIMARY KEY (Group_Id)
 );
-/**---------------------------Grouping--------------------------**/
+/**---------------------------Group Details--------------------------**/
 
-/**---------------------------Expense--------------------------**/
+/**---------------------------Expense of a group--------------------------**/
 create table Splitwise.Expense
 (
 Expense_Id int AUTO_INCREMENT,
-Expense_Amt int NOT NULL,
+Expense_Amt double NOT NULL,
 Group_Id int NOT NULL,
 
 CONSTRAINT PK_ExpenId PRIMARY KEY (Expense_Id),
 CONSTRAINT FK_GroupidX FOREIGN KEY (Group_Id) REFERENCES Splitwise.Grouping(Group_Id)
 );
-/**---------------------------Expense--------------------------**/
+/**---------------------------Expense of a group--------------------------**/
 
-/**---------------------------User_Group--------------------------**/
+/**---------------------------User belongs to group--------------------------**/
 create table Splitwise.User_Group
 (
+id int NOT NULL,
 User_Id int,
 Group_Id int,
 
-CONSTRAINT UserGroup PRIMARY KEY(User_Id,Group_Id),
+CONSTRAINT UserGroup PRIMARY KEY(id),
 Constraint FK_IdUser FOREIGN KEY (User_Id) REFERENCES Splitwise.User(User_Id),
 Constraint FK_IdGroup FOREIGN KEY (Group_Id) REFERENCES Splitwise.Grouping(Group_Id)
 );
-/**---------------------------User_Group--------------------------**/
+/**---------------------------User belongs to group--------------------------**/
 
 
-/**---------------------------User_Exp--------------------------**/
+/**---------------------------Expense of a user--------------------------**/
 create table Splitwise.User_Exp
 (
-Exp_Amt int,
-User_Id int,
+id int NOT NULL AUTO_INCREMENT,
+User_Id int NOT NULL,
+Expense_Amt double NOT NULL,
 
-CONSTRAINT ExpensUser PRIMARY KEY(Exp_Amt,User_Id),
-CONSTRAINT FK_User_Id FOREIGN KEY (User_Id) REFERENCES Splitwise.User (User_Id),
-CONSTRAINT FK_Exp_Amt FOREIGN KEY (Exp_Amt) REFERENCES Splitwise.Expense(Exp_Amt)
+CONSTRAINT UserExpId PRIMARY KEY(id),
+CONSTRAINT FK_User_Id FOREIGN KEY (User_Id) REFERENCES Splitwise.User (User_Id)
 );
-/**---------------------------User_Exp--------------------------**/
+/**---------------------------Expense of a user--------------------------**/
 
-/**---------------------------Debt--------------------------**/
+/**---------------------------Debt of a group--------------------------**/
 create table Splitwise.Debt
 (
-Debt_Id int,
-Debt_Amt int,
-Group_Id int,
+Debt_Id int NOT NULL AUTO_INCREMENT,
+Debt_Amt double NOT NULL,
+Group_Id int NOT NULL,
 
 CONSTRAINT PK_DebtID PRIMARY KEY(Debt_Id),
 CONSTRAINT FKGroupID FOREIGN KEY (Group_Id) REFERENCES Splitwise.Grouping(Group_Id)
 );
-/**---------------------------Debt--------------------------**/
+/**---------------------------Debt of a group--------------------------**/
 
 /**---------------------------User_Debt--------------------------**/
 create table Splitwise.User_debt
 (
-User_Id int,
-Debt_Id int,
+id int NOT NULL AUTO_INCREMENT,
+User_Id int NOT NULL,
+Debt_Id int NOT NULL,
 
-CONSTRAINT UserDebtPK PRIMARY KEY(User_Id,Debt_id),
+CONSTRAINT UserDebtPK PRIMARY KEY(id),
 CONSTRAINT UserIDFK FOREIGN KEY(User_Id) REFERENCES Splitwise.User(User_Id),
  CONSTRAINT DebtIDFK FOREIGN KEY(Debt_Id) REFERENCES Splitwise.Debt(Debt_Id)
 );
@@ -104,27 +106,27 @@ Insert into Splitwise.Grouping values(3,"Coral ref");
 /**---------------------------------------------------------**/
 
 /**------Inserting values into 'Expense' table-----------------**/
-Insert into Splitwise.Expense values(500,1);
-Insert into Splitwise.Expense values(800,2);
-Insert into Splitwise.Expense values(200,3);
+Insert into Splitwise.Expense values(1, 500,1);
+Insert into Splitwise.Expense values(2, 800,2);
+Insert into Splitwise.Expense values(3, 200,3);
 
 /**---------------------------------------------------------**/
 
 /**------Inserting values into 'User_Group' table-----------------**/
-Insert into Splitwise.User_Group values(1,1);
-Insert into Splitwise.User_Group values(2,1);
-Insert into Splitwise.User_Group values(3,2);
-Insert into Splitwise.User_Group values(4,3);
-Insert into Splitwise.User_Group values(5,3);
+Insert into Splitwise.User_Group values(1, 1,1);
+Insert into Splitwise.User_Group values(2, 2,1);
+Insert into Splitwise.User_Group values(3, 3,2);
+Insert into Splitwise.User_Group values(4, 4,3);
+Insert into Splitwise.User_Group values(5, 5,3);
 
 /**---------------------------------------------------------**/
 
 /**------Inserting values into 'User_Exp' table-----------------**/
-Insert into Splitwise.User_Exp values(500,1);
-Insert into Splitwise.User_Exp values(500,2);
-Insert into Splitwise.User_Exp values(800,3);
-Insert into Splitwise.User_Exp values(200,4);
-Insert into Splitwise.User_Exp values(200,5);
+Insert into Splitwise.User_Exp values(1, 1,500);
+Insert into Splitwise.User_Exp values(2, 2,500);
+Insert into Splitwise.User_Exp values(3, 3,800);
+Insert into Splitwise.User_Exp values(4, 4,200);
+Insert into Splitwise.User_Exp values(5, 5,2000);
 
 /**---------------------------------------------------------**/
 
@@ -135,11 +137,11 @@ Insert into Splitwise.Debt values(3,0,3);
 /**---------------------------------------------------------**/
 
 /**------Inserting values into 'User_Debt' table-----------------**/
-Insert into Splitwise.User_Debt values(1,1);
-Insert into Splitwise.User_Debt values(2,1);
-Insert into Splitwise.User_Debt values(3,2);
-Insert into Splitwise.User_Debt values(4,3);
-Insert into Splitwise.User_Debt values(5,3);
+Insert into Splitwise.User_Debt values(1, 1,1);
+Insert into Splitwise.User_Debt values(2, 2,1);
+Insert into Splitwise.User_Debt values(3, 3,2);
+Insert into Splitwise.User_Debt values(4, 4,3);
+Insert into Splitwise.User_Debt values(5, 5,3);
 /**---------------------------------------------------------**/
 
 /**************************************************************

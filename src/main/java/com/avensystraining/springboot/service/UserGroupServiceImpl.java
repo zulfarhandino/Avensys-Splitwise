@@ -8,51 +8,51 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.avensystraining.springboot.dao.EmployeeRepository;
-import com.avensystraining.springboot.entity.Employee;
+import com.avensystraining.springboot.dao.UserGroupRepository;
+import com.avensystraining.springboot.entity.UserGroup;
 
 @Service
-public class UserGroupServiceImpl implements EmployeeService {
+public class UserGroupServiceImpl implements UserGroupService {
 
-	private EmployeeRepository employeeRepository;
+	private UserGroupRepository userGroupRepository;
 	
 	@Autowired
-	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
-		this.employeeRepository = employeeRepository;
+	public UserGroupServiceImpl(UserGroupRepository userGroupRepository) {
+		this.userGroupRepository = userGroupRepository;
 	}
 	
 	@Override
 	@Transactional
-	public List<Employee> findAll() {
-		return employeeRepository.findAll();
+	public List<UserGroup> findAll() {
+		return userGroupRepository.findAll();
 	}
 
 	@Override
 	@Transactional
-	public Employee findById(int id) {
+	public UserGroup findById(int id) {
 		// TODO Auto-generated method stub
-		Optional<Employee> result = employeeRepository.findById(id);
-		Employee employee = null;
+		Optional<UserGroup> result = userGroupRepository.findById(id);
+		UserGroup userGroup = null;
 		
 		if(result.isPresent()) {
-			employee = result.get();
+			userGroup = result.get();
 		}
 		else {
-			throw new RuntimeException("Employee id: " + id + " not found.");
+			throw new RuntimeException("UserGroup id: " + id + " not found.");
 		}
-		return employee;
+		return userGroup;
 	}
 
 	@Override
 	@Transactional
-	public void save(Employee employee) {
-		employeeRepository.save(employee);
+	public void save(UserGroup userGroup) {
+		userGroupRepository.save(userGroup);
 	}
 
 	@Override
 	@Transactional
 	public void delete(int id) {
-		employeeRepository.deleteById(id);
+		userGroupRepository.deleteById(id);
 	}
 	
 }

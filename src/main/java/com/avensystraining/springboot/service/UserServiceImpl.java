@@ -8,51 +8,51 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.avensystraining.springboot.dao.EmployeeRepository;
-import com.avensystraining.springboot.entity.Employee;
+import com.avensystraining.springboot.dao.UserRepository;
+import com.avensystraining.springboot.entity.User;
 
 @Service
-public class UserServiceImpl implements EmployeeService {
+public class UserServiceImpl implements UserService {
 
-	private EmployeeRepository employeeRepository;
+	private UserRepository userRepository;
 	
 	@Autowired
-	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
-		this.employeeRepository = employeeRepository;
+	public UserServiceImpl(UserRepository userRepository) {
+		this.userRepository = userRepository;
 	}
 	
 	@Override
 	@Transactional
-	public List<Employee> findAll() {
-		return employeeRepository.findAll();
+	public List<User> findAll() {
+		return userRepository.findAll();
 	}
 
 	@Override
 	@Transactional
-	public Employee findById(int id) {
+	public User findById(int id) {
 		// TODO Auto-generated method stub
-		Optional<Employee> result = employeeRepository.findById(id);
-		Employee employee = null;
+		Optional<User> result = userRepository.findById(id);
+		User user = null;
 		
 		if(result.isPresent()) {
-			employee = result.get();
+			user = result.get();
 		}
 		else {
-			throw new RuntimeException("Employee id: " + id + " not found.");
+			throw new RuntimeException("User id: " + id + " not found.");
 		}
-		return employee;
+		return user;
 	}
 
 	@Override
 	@Transactional
-	public void save(Employee employee) {
-		employeeRepository.save(employee);
+	public void save(User user) {
+		userRepository.save(user);
 	}
 
 	@Override
 	@Transactional
 	public void delete(int id) {
-		employeeRepository.deleteById(id);
+		userRepository.deleteById(id);
 	}
 	
 }

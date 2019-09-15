@@ -8,51 +8,51 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.avensystraining.springboot.dao.EmployeeRepository;
-import com.avensystraining.springboot.entity.Employee;
+import com.avensystraining.springboot.dao.ExpenseRepository;
+import com.avensystraining.springboot.entity.Expense;
 
 @Service
-public class ExpenseServiceImpl implements EmployeeService {
+public class ExpenseServiceImpl implements ExpenseService {
 
-	private EmployeeRepository employeeRepository;
+	private ExpenseRepository expenseRepository;
 	
 	@Autowired
-	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
-		this.employeeRepository = employeeRepository;
+	public ExpenseServiceImpl(ExpenseRepository expenseRepository) {
+		this.expenseRepository = expenseRepository;
 	}
 	
 	@Override
 	@Transactional
-	public List<Employee> findAll() {
-		return employeeRepository.findAll();
+	public List<Expense> findAll() {
+		return expenseRepository.findAll();
 	}
 
 	@Override
 	@Transactional
-	public Employee findById(int id) {
+	public Expense findById(int id) {
 		// TODO Auto-generated method stub
-		Optional<Employee> result = employeeRepository.findById(id);
-		Employee employee = null;
+		Optional<Expense> result = expenseRepository.findById(id);
+		Expense expense = null;
 		
 		if(result.isPresent()) {
-			employee = result.get();
+			expense = result.get();
 		}
 		else {
-			throw new RuntimeException("Employee id: " + id + " not found.");
+			throw new RuntimeException("Expense id: " + id + " not found.");
 		}
-		return employee;
+		return expense;
 	}
 
 	@Override
 	@Transactional
-	public void save(Employee employee) {
-		employeeRepository.save(employee);
+	public void save(Expense expense) {
+		expenseRepository.save(expense);
 	}
 
 	@Override
 	@Transactional
 	public void delete(int id) {
-		employeeRepository.deleteById(id);
+		expenseRepository.deleteById(id);
 	}
 	
 }

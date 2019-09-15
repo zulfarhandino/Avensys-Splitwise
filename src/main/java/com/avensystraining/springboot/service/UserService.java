@@ -2,15 +2,15 @@ package com.avensystraining.springboot.service;
 
 import java.util.List;
 
-import com.avensystraining.springboot.entity.Employee;
+import com.avensystraining.springboot.entity.User;
 
 public interface UserService {
 	
-	public List<Employee> findAll();
+	public List<User> findAll();
 	
-	public Employee findById(int id);
+	public User findById(int id);
 	
-	public void save(Employee employee);
+	public void save(User user);
 	
 	public void delete(int id);
 

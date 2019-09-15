@@ -20,7 +20,7 @@ public class Expense {
 	private int expense_id;
 	
 	@Column(name="Expense_Amt")
-	private String expense_amt;
+	private double expense_amt;
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="Group_Id")
@@ -30,14 +30,14 @@ public class Expense {
 		
 	}
 
-	public Expense(int expense_id, String expense_amt, Grouping grouping) {
+	public Expense(int expense_id, double expense_amt, Grouping grouping) {
 		super();
 		this.expense_id = expense_id;
 		this.expense_amt = expense_amt;
 		this.grouping = grouping;
 	}
 
-	public Expense(String expense_amt, Grouping grouping) {
+	public Expense(double expense_amt, Grouping grouping) {
 		super();
 		this.expense_amt = expense_amt;
 		this.grouping = grouping;
@@ -51,11 +51,11 @@ public class Expense {
 		this.expense_id = expense_id;
 	}
 
-	public String getExpense_amt() {
+	public double getExpense_amt() {
 		return expense_amt;
 	}
 
-	public void setExpense_amt(String expense_amt) {
+	public void setExpense_amt(double expense_amt) {
 		this.expense_amt = expense_amt;
 	}
 

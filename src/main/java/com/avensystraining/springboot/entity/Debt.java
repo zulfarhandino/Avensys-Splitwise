@@ -1,71 +1,76 @@
 package com.avensystraining.springboot.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="employee")
+@Table(name="Debt")
 public class Debt {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="Debt_Id")
+	private int debt_id;
 	
-	@Column(name="first_name")
-	private String first_name;
+	@Column(name="Debt_Amt")
+	private double debt_amt;
 	
-	@Column(name="last_name")
-	private String last_name;
-	
-	@Column(name="email")
-	private String email;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="Group_Id")
+	private Grouping group;
 	
 	public Debt() {
 		
 	}
 
-	public int getId() {
-		return id;
+	public Debt(int debt_id, double debt_amt, Grouping group) {
+		super();
+		this.debt_id = debt_id;
+		this.debt_amt = debt_amt;
+		this.group = group;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public Debt(double debt_amt, Grouping group) {
+		super();
+		this.debt_amt = debt_amt;
+		this.group = group;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public int getDebt_id() {
+		return debt_id;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setDebt_id(int debt_id) {
+		this.debt_id = debt_id;
 	}
 
-	public String getLast_name() {
-		return last_name;
+	public double getDebt_amt() {
+		return debt_amt;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setDebt_amt(double debt_amt) {
+		this.debt_amt = debt_amt;
 	}
 
-	public String getEmail() {
-		return email;
+	public Grouping getGroup() {
+		return group;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setGroup(Grouping group) {
+		this.group = group;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", email=" + email
-				+ "]";
+		return "Debt [debt_id=" + debt_id + ", debt_amt=" + debt_amt + ", group=" + group + "]";
 	}
-
+	
 	
 }

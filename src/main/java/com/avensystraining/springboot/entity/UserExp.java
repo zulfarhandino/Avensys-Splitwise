@@ -1,14 +1,17 @@
 package com.avensystraining.springboot.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="employee")
+@Table(name="User_Exp")
 public class UserExp {
 	
 	@Id
@@ -16,17 +19,28 @@ public class UserExp {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="first_name")
-	private String first_name;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="User_Id")
+	private User user;
 	
-	@Column(name="last_name")
-	private String last_name;
-	
-	@Column(name="email")
-	private String email;
+	@Column(name="Expense_Amt")
+	private double expense_amt;
 	
 	public UserExp() {
 		
+	}
+
+	public UserExp(int id, User user, double expense_amt) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.expense_amt = expense_amt;
+	}
+
+	public UserExp(User user, double expense_amt) {
+		super();
+		this.user = user;
+		this.expense_amt = expense_amt;
 	}
 
 	public int getId() {
@@ -37,35 +51,26 @@ public class UserExp {
 		this.id = id;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public User getUser() {
+		return user;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public String getLast_name() {
-		return last_name;
+	public double getExpense_amt() {
+		return expense_amt;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setExpense_amt(double expense_amt) {
+		this.expense_amt = expense_amt;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", email=" + email
-				+ "]";
+		return "UserExp [id=" + id + ", user=" + user + ", expense_amt=" + expense_amt + "]";
 	}
 
-	
+	 
 }

@@ -12,51 +12,73 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.avensystraining.springboot.entity.Employee;
-import com.avensystraining.springboot.service.EmployeeService;
+import com.avensystraining.springboot.entity.User;
+import com.avensystraining.springboot.service.DebtService;
+import com.avensystraining.springboot.service.ExpenseService;
+import com.avensystraining.springboot.service.GroupingService;
+import com.avensystraining.springboot.service.UserDebtService;
+import com.avensystraining.springboot.service.UserExpService;
+import com.avensystraining.springboot.service.UserGroupService;
+import com.avensystraining.springboot.service.UserService;
 
 @RestController
 @RequestMapping("/api")
 public class SplitwiseController {
-	
-	private EmployeeService employeeService;
-	
+
+	private DebtService debtService;
+	private ExpenseService expenseService;
+	private GroupingService groupingService;
+	private UserDebtService userDebtService;
+	private UserExpService userExpService;
+	private UserGroupService userGroupService;
+	private UserService userService;
+
 	@Autowired
-	public SplitwiseController(EmployeeService employeeService) {
-		this.employeeService = employeeService;
+	public SplitwiseController(DebtService debtService, ExpenseService expenseService, GroupingService groupingService,
+			UserDebtService userDebtService, UserExpService userExpService, UserGroupService userGroupService,
+			UserService userService) {
+		this.debtService = debtService;
+		this.expenseService = expenseService;
+		this.groupingService = groupingService;
+		this.userDebtService = userDebtService;
+		this.userExpService = userExpService;
+		this.userGroupService = userGroupService;
+		this.userService = userService;
 	}
 	
-	@GetMapping("/employees")
-	public List<Employee> findAll() {
-		return employeeService.findAll();
+	// Create mappings as necessary
+
+	@GetMapping("/user")
+	public List<User> findAll() {
+		return userService.findAll();
 	}
-	
-	@GetMapping("/employees/{id}")
-	public Employee getEmployee(@PathVariable int id) {
-		Employee employee = employeeService.findById(id);
-		if(employee == null) {
-			throw new RuntimeException("Employee not found");
+
+	@GetMapping("/user/{id}")
+	public User getUser(@PathVariable int id) {
+		User user = userService.findById(id);
+		if (user == null) {
+			throw new RuntimeException("User not found");
 		}
-		
-		return employee;
+
+		return user;
 	}
-	
-	@PostMapping("/employees")
-	public Employee addEmployee(@RequestBody Employee employee) {
-		employee.setId(0);
-		employeeService.save(employee);
-		return employee;
+
+	@PostMapping("/user")
+	public User addUser(@RequestBody User user) {
+		user.setId(0);
+		userService.save(user);
+		return user;
 	}
-	
-	@PutMapping("/employees")
-	public Employee updateEmployee(@RequestBody Employee employee) {
-		employeeService.save(employee);
-		return employee;
+
+	@PutMapping("/user")
+	public User updateUser(@RequestBody User user) {
+		userService.save(user);
+		return user;
 	}
-	
-	@DeleteMapping("/employees/{id}")
-	public void deleteEmployee(@PathVariable int id) {
-		employeeService.delete(id);
+
+	@DeleteMapping("/user/{id}")
+	public void deleteUser(@PathVariable int id) {
+		userService.delete(id);
 	}
-	
+
 }

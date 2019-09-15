@@ -1,14 +1,17 @@
 package com.avensystraining.springboot.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="employee")
+@Table(name="User_debt")
 public class UserDebt {
 	
 	@Id
@@ -16,19 +19,31 @@ public class UserDebt {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="first_name")
-	private String first_name;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="User_Id")
+	private User user;
 	
-	@Column(name="last_name")
-	private String last_name;
-	
-	@Column(name="email")
-	private String email;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="Group_Id")
+	private Grouping grouping;
 	
 	public UserDebt() {
 		
 	}
 
+	public UserDebt(int id, User user, Grouping grouping) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.grouping = grouping;
+	}
+
+	public UserDebt(User user, Grouping grouping) {
+		super();
+		this.user = user;
+		this.grouping = grouping;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -37,35 +52,25 @@ public class UserDebt {
 		this.id = id;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public User getUser() {
+		return user;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public String getLast_name() {
-		return last_name;
+	public Grouping getGrouping() {
+		return grouping;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setGrouping(Grouping grouping) {
+		this.grouping = grouping;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", email=" + email
-				+ "]";
+		return "UserDebt [id=" + id + ", user=" + user + ", grouping=" + grouping + "]";
 	}
-
 	
 }

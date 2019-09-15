@@ -8,51 +8,51 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.avensystraining.springboot.dao.EmployeeRepository;
-import com.avensystraining.springboot.entity.Employee;
+import com.avensystraining.springboot.dao.GroupingRepository;
+import com.avensystraining.springboot.entity.Grouping;
 
 @Service
-public class GroupingServiceImpl implements EmployeeService {
+public class GroupingServiceImpl implements GroupingService {
 
-	private EmployeeRepository employeeRepository;
+	private GroupingRepository groupingRepository;
 	
 	@Autowired
-	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
-		this.employeeRepository = employeeRepository;
+	public GroupingServiceImpl(GroupingRepository groupingRepository) {
+		this.groupingRepository = groupingRepository;
 	}
 	
 	@Override
 	@Transactional
-	public List<Employee> findAll() {
-		return employeeRepository.findAll();
+	public List<Grouping> findAll() {
+		return groupingRepository.findAll();
 	}
 
 	@Override
 	@Transactional
-	public Employee findById(int id) {
+	public Grouping findById(int id) {
 		// TODO Auto-generated method stub
-		Optional<Employee> result = employeeRepository.findById(id);
-		Employee employee = null;
+		Optional<Grouping> result = groupingRepository.findById(id);
+		Grouping grouping = null;
 		
 		if(result.isPresent()) {
-			employee = result.get();
+			grouping = result.get();
 		}
 		else {
-			throw new RuntimeException("Employee id: " + id + " not found.");
+			throw new RuntimeException("Grouping id: " + id + " not found.");
 		}
-		return employee;
+		return grouping;
 	}
 
 	@Override
 	@Transactional
-	public void save(Employee employee) {
-		employeeRepository.save(employee);
+	public void save(Grouping grouping) {
+		groupingRepository.save(grouping);
 	}
 
 	@Override
 	@Transactional
 	public void delete(int id) {
-		employeeRepository.deleteById(id);
+		groupingRepository.deleteById(id);
 	}
 	
 }

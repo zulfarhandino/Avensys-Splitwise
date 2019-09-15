@@ -12,7 +12,7 @@ import com.avensystraining.springboot.dao.EmployeeRepository;
 import com.avensystraining.springboot.entity.Employee;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class UserExpServiceImpl implements EmployeeService {
 
 	private EmployeeRepository employeeRepository;
 	

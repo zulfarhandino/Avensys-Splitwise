@@ -17,12 +17,12 @@ import com.avensystraining.springboot.service.EmployeeService;
 
 @RestController
 @RequestMapping("/api")
-public class EmployeeRestController {
+public class SplitwiseController {
 	
 	private EmployeeService employeeService;
 	
 	@Autowired
-	public EmployeeRestController(EmployeeService employeeService) {
+	public SplitwiseController(EmployeeService employeeService) {
 		this.employeeService = employeeService;
 	}
 	

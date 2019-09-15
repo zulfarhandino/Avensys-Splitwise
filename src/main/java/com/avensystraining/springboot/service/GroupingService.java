@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.avensystraining.springboot.entity.Employee;
 
-public interface EmployeeService {
+public interface GroupingService {
 	
 	public List<Employee> findAll();
 	

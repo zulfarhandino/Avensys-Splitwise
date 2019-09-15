@@ -28,10 +28,11 @@ CONSTRAINT PK_GroupID PRIMARY KEY (Group_Id)
 /**---------------------------Expense--------------------------**/
 create table Splitwise.Expense
 (
-Exp_Amt int,
-Group_Id int,
+Expense_Id int AUTO_INCREMENT,
+Expense_Amt int NOT NULL,
+Group_Id int NOT NULL,
 
-CONSTRAINT PK_ExpenAmt PRIMARY KEY (Exp_Amt),
+CONSTRAINT PK_ExpenId PRIMARY KEY (Expense_Id),
 CONSTRAINT FK_GroupidX FOREIGN KEY (Group_Id) REFERENCES Splitwise.Grouping(Group_Id)
 );
 /**---------------------------Expense--------------------------**/

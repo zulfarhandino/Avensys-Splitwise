@@ -8,64 +8,47 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="employee")
+@Table(name="Grouping")
 public class Grouping {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="Group_Id")
+	private int group_id;
 	
-	@Column(name="first_name")
-	private String first_name;
-	
-	@Column(name="last_name")
-	private String last_name;
-	
-	@Column(name="email")
-	private String email;
+	@Column(name="Group_Name")
+	private String group_name;
 	
 	public Grouping() {
 		
 	}
-
-	public int getId() {
-		return id;
+	
+	public Grouping(int group_id, String group_name) {
+		super();
+		this.group_id = group_id;
+		this.group_name = group_name;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public Grouping(String group_name) {
+		super();
+		this.group_name = group_name;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public int getGroup_id() {
+		return group_id;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setGroup_id(int group_id) {
+		this.group_id = group_id;
 	}
 
-	public String getLast_name() {
-		return last_name;
+	public String getGroup_name() {
+		return group_name;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setGroup_name(String group_name) {
+		this.group_name = group_name;
 	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", email=" + email
-				+ "]";
-	}
-
+	
 	
 }

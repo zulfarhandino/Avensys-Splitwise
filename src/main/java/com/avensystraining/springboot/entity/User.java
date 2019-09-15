@@ -8,25 +8,40 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="employee")
+@Table(name="User")
 public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name="User_Id")
 	private int id;
 	
-	@Column(name="first_name")
-	private String first_name;
+	@Column(name="User_Name")
+	private String user_name;
 	
-	@Column(name="last_name")
-	private String last_name;
+	@Column(name="User_Email")
+	private String user_email;
 	
-	@Column(name="email")
-	private String email;
+	@Column(name="User_Password")
+	private String user_password;
 	
 	public User() {
 		
+	}
+	
+	public User(int id, String user_name, String user_email, String user_password) {
+		super();
+		this.id = id;
+		this.user_name = user_name;
+		this.user_email = user_email;
+		this.user_password = user_password;
+	}
+
+	public User(String user_name, String user_email, String user_password) {
+		super();
+		this.user_name = user_name;
+		this.user_email = user_email;
+		this.user_password = user_password;
 	}
 
 	public int getId() {
@@ -37,34 +52,34 @@ public class User {
 		this.id = id;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public String getUser_name() {
+		return user_name;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 
-	public String getLast_name() {
-		return last_name;
+	public String getUser_email() {
+		return user_email;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUser_password() {
+		return user_password;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUser_password(String user_password) {
+		this.user_password = user_password;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", email=" + email
-				+ "]";
+		return "User [id=" + id + ", user_name=" + user_name + ", user_email=" + user_email + ", user_password="
+				+ user_password + "]";
 	}
 
 	

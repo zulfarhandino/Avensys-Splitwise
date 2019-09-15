@@ -1,71 +1,70 @@
 package com.avensystraining.springboot.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="employee")
+@Table(name="Expense")
 public class Expense {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="Expense_Id")
+	private int expense_id;
 	
-	@Column(name="first_name")
-	private String first_name;
+	@Column(name="Expense_Amt")
+	private String expense_amt;
 	
-	@Column(name="last_name")
-	private String last_name;
-	
-	@Column(name="email")
-	private String email;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="Group_Id")
+	private Grouping grouping;
 	
 	public Expense() {
 		
 	}
 
-	public int getId() {
-		return id;
+	public Expense(int expense_id, String expense_amt, Grouping grouping) {
+		super();
+		this.expense_id = expense_id;
+		this.expense_amt = expense_amt;
+		this.grouping = grouping;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public Expense(String expense_amt, Grouping grouping) {
+		super();
+		this.expense_amt = expense_amt;
+		this.grouping = grouping;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public int getExpense_id() {
+		return expense_id;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setExpense_id(int expense_id) {
+		this.expense_id = expense_id;
 	}
 
-	public String getLast_name() {
-		return last_name;
+	public String getExpense_amt() {
+		return expense_amt;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setExpense_amt(String expense_amt) {
+		this.expense_amt = expense_amt;
 	}
 
-	public String getEmail() {
-		return email;
+	public Grouping getGrouping() {
+		return grouping;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setGrouping(Grouping grouping) {
+		this.grouping = grouping;
 	}
-
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", email=" + email
-				+ "]";
-	}
-
 	
 }
